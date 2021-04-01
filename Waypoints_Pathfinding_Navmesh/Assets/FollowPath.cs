@@ -37,10 +37,9 @@ public class FollowPath : MonoBehaviour //movimentação do tank
     void LateUpdate()
     {
         if (g.getPathLength() == 0 || currentWP == g.getPathLength())//condicional que pega o tamanho certo do path que o objeto caminhará
-            return;
-        //O nó que estará mais próximo neste momentocurrentNode= g.getPathPoint(currentWP);
-        //se estivermos mais próximo bastante do nó o tanque se moverá para o próximoif
-        if(Vector3.Distance(g.getPathPoint(currentWP).transform.position, transform.position) < accuracy)
+            return; //pega o node mais próximo do momento atual caminhando pro próximo if
+
+        if (Vector3.Distance(g.getPathPoint(currentWP).transform.position, transform.position) < accuracy)
             {
             currentWP++;
             }
