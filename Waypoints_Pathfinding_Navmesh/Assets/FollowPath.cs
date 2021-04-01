@@ -52,5 +52,6 @@ public class FollowPath : MonoBehaviour //movimentação do tank
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), 
                 Time.deltaTime * rotSpeed); //Slerp com movimentação mais suave
         }
+        this.transform.Translate(0, 0, speed * Time.deltaTime);
     }
 }
