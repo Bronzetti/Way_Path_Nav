@@ -22,15 +22,20 @@ public class FollowPath : MonoBehaviour //movimentação do tank
         currentNode = wps[0];//matriz abastecida com cada ponto criado no mapa para que seja feito a trajetória correta
 
     }
-    public void GoToHeli()//Método 
+    public void GoToHeli()//Método que fará meu tanque andar até o heliporto
     {
         g.AStar(currentNode, wps[1]);// g.ASrtar e local aonde tá criando meu mapa
         currentWP = 0; //ponto final no qual estará percorrendo 
     }
-    public void GoToRuin()
+    public void GoToRuin()// Metodo que fárá meu tanque andar até as ruínas
     {
         g.AStar(currentNode, wps[6]); 
         currentWP = 0; 
+    }
+    public void GoToRefinery() //Método que fará meu tanque andar até a refinaria 
+    {
+        g.AStar(currentNode, wps[10]);
+        currentWP = 0;
     }
 
     // Update is called once per frame
