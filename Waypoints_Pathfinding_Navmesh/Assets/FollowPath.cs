@@ -4,43 +4,49 @@ using UnityEngine;
 
 public class FollowPath : MonoBehaviour //movimentação do tank
 {
-    Transform goal;//pontos que o objeto irá
-    float speed= 5.0f;//velocidade do tank
-    float accuracy= 1.0f;//aproximação do objeto com o ponto pra poder já rotacionar para o próximo
-    float rotSpeed= 2.0f;//velocidade de rotação do objeto
+ //   Transform goal;//pontos que o objeto irá
+   // float speed= 5.0f;//velocidade do tank
+    //float accuracy= 1.0f;//aproximação do objeto com o ponto pra poder já rotacionar para o próximo
+    //float rotSpeed= 2.0f;//velocidade de rotação do objeto
     public GameObject wpManager;//ciração do gameobject wpManager 
     GameObject[] wps; // array com index wps
-    GameObject currentNode;//gameobject de cada nó
-    int currentWP= 0; //necessita ser igual a zero inicialmente para iniciar a movimentação
-    Graph g;//refenencia meu arquivo Graph 
+    UnityEngine.AI.NavMeshAgent agent;
+    //GameObject currentNode;//gameobject de cada nó
+    //int currentWP= 0; //necessita ser igual a zero inicialmente para iniciar a movimentação
+    //Graph g;//refenencia meu arquivo Graph 
 
     // Start is called before the first frame update
     void Start()
     {
         wps = wpManager.GetComponent<WPManager>().waypoints;//gerenciamento dos componentes dentro do WPManager 
-        g = wpManager.GetComponent<WPManager>().graph; //cada waypoint possui uma informação desse gerenciamento dentro do array
-        currentNode = wps[0];//matriz abastecida com cada ponto criado no mapa para que seja feito a trajetória correta
+        agent = this.GetComponent<UnityEngine.AI.NavMeshAgent>();
+        //g = wpManager.GetComponent<WPManager>().graph; //cada waypoint possui uma informação desse gerenciamento dentro do array
+        //currentNode = wps[0];//matriz abastecida com cada ponto criado no mapa para que seja feito a trajetória correta
 
     }
     public void GoToHeli()//Método que fará meu tanque andar até o heliporto
     {
-        g.AStar(currentNode, wps[1]);// g.ASrtar e local aonde tá criando meu mapa
-        currentWP = 0; //ponto final no qual estará percorrendo 
+        agent.SetDestination(wps[1].transform.position);
+        //g.AStar(currentNode, wps[1]);// g.ASrtar e local aonde tá criando meu mapa
+        //currentWP = 0; //ponto final no qual estará percorrendo 
     }
     public void GoToRuin()// Metodo que fárá meu tanque andar até as ruínas
     {
-        g.AStar(currentNode, wps[6]); 
-        currentWP = 0; 
+        agent.SetDestination(wps[5].transform.position);
+        //g.AStar(currentNode, wps[6]); 
+        //currentWP = 0; 
     }
     public void GoToRefinery() //Método que fará meu tanque andar até a refinaria 
     {
-        g.AStar(currentNode, wps[10]);
-        currentWP = 0;
+        agent.SetDestination(wps[10].transform.position);
+        //g.AStar(currentNode, wps[10]);
+        //currentWP = 0;
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
+        /* código utilizado para Waypoint 
         if (g.getPathLength() == 0 || currentWP == g.getPathLength())//condicional que pega o tamanho certo do path que o objeto caminhará
             return; //pega o node mais próximo do momento atual caminhando pro próximo if
 
@@ -58,5 +64,6 @@ public class FollowPath : MonoBehaviour //movimentação do tank
                 Time.deltaTime * rotSpeed); //Slerp com movimentação mais suave
         }
         this.transform.Translate(0, 0, speed * Time.deltaTime);
+        */
     }
 }
